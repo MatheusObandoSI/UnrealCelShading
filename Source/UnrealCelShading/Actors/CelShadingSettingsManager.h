@@ -23,6 +23,9 @@ public:
     UMaterialParameterCollection* MaterialParameterCollection = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float Saturation = 1.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool bTrackSourceLightIntensity = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)

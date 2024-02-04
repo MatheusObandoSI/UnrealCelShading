@@ -12,6 +12,7 @@ void ACelShadingSettingsManager::OnConstruction(const FTransform& Transform)
 	
 	if (IsValid(MaterialParameterCollection))
 	{
+		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("Saturation"), Saturation);
 		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("ShadeContrast"), ShadeContrast);
 		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), LightIntensity * LightIntensityScale);
 		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColorInfluency"), LightColorInfluency);
@@ -26,6 +27,11 @@ void ACelShadingSettingsManager::OnConstruction(const FTransform& Transform)
 			{
 				UKismetMaterialLibrary::SetVectorParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColor"), LightColor);
 			}
+		}
+
+		else
+		{
+			UKismetMaterialLibrary::SetVectorParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColor"), LightColor);
 		}
 	}
 }

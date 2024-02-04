@@ -1,10 +1,9 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/DirectionalLight.h"
+#include "Components/DirectionalLightComponent.h"
 #include "GameFramework/Actor.h"
+#include "Engine/DirectionalLight.h"
 #include "Materials/MaterialParameterCollection.h"
 #include "DayTimeManager.generated.h"
 
@@ -14,28 +13,38 @@ class UNREALCELSHADING_API ADayTimeManager : public AActor
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
-	ADayTimeManager();
 
-	UPROPERTY(EditAnywhere)
-	ADirectionalLight* DirectionalLight = nullptr;
+    ADayTimeManager();
 
-	UPROPERTY(EditAnywhere)
-	float TimeProgressSpeed = 10.0f;
+    virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere)
-	UMaterialParameterCollection* CelShadingParameterCollection = nullptr;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    ADirectionalLight* SunLight = nullptr;
 
-	// UPROPERTY(EditAnywhere)
-	// const bool bUseRealTime = false;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    UMaterialParameterCollection* MaterialParameterCollection = nullptr;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float InitialDayProgress = 0.5f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float DayDuration = 1.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float MinShadeContrast = 0.3f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float MaxShadeContrast = 1.0f;
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
-	void UpdateDayTime(float DeltaTime);
+    virtual void BeginPlay() override;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+private:
+
+    void UpdateSunPosition(float DeltaTime);
+    void UpdateShadeContrast();
+
+    float DayProgress = 0.0f;
+    FRotator InitialSunRotation;
 };

@@ -22,19 +22,19 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     UMaterialParameterCollection* MaterialParameterCollection = nullptr;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0"))
     float Saturation = 1.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool bTrackSourceLightIntensity = false;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0"))
     float LightIntensity = 1.0f;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0"))
     float LightIntensityScale = 1.0f;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0"))
     float ShadeContrast = 1.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -43,7 +43,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FLinearColor LightColor = FLinearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0", ClampMax = "1.0"))
     float LightColorInfluency = 0.5f;
 
 

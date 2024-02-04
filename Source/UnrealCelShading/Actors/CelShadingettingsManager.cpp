@@ -6,10 +6,8 @@ ACelShadingSettingsManager::ACelShadingSettingsManager()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-void ACelShadingSettingsManager::OnConstruction(const FTransform& Transform)
+void ACelShadingSettingsManager::SetupCelShadingParameters()
 {
-	Super::OnConstruction(Transform);
-	
 	if (IsValid(MaterialParameterCollection))
 	{
 		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("Saturation"), Saturation);
@@ -36,10 +34,19 @@ void ACelShadingSettingsManager::OnConstruction(const FTransform& Transform)
 	}
 }
 
+void ACelShadingSettingsManager::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+	
+	SetupCelShadingParameters();
+}
+
 void ACelShadingSettingsManager::BeginPlay()
 {
 	Super::BeginPlay();
+	SetupCelShadingParameters();
 }
+
 
 void ACelShadingSettingsManager::Tick(float DeltaTime)
 {
@@ -55,4 +62,3 @@ void ACelShadingSettingsManager::Tick(float DeltaTime)
 		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), SourceLight->GetBrightness() * LightIntensityScale);
 	}
 }
-

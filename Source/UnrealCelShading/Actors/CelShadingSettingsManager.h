@@ -56,5 +56,5 @@ protected:
     virtual void OnConstruction(const FTransform& Transform) override;
 
 private:
-    virtual void SetupCelShadingParameters();
+    void SetupCelShadingParameters();
 };

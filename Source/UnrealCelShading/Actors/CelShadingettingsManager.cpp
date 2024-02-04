@@ -37,14 +37,16 @@ void ACelShadingSettingsManager::SetupCelShadingParameters()
 void ACelShadingSettingsManager::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
-	
+
 	SetupCelShadingParameters();
 }
 
 void ACelShadingSettingsManager::BeginPlay()
 {
 	Super::BeginPlay();
+
 	SetupCelShadingParameters();
+	SetActorTickEnabled(bEnableRuntimeLightTracking);
 }
 
 

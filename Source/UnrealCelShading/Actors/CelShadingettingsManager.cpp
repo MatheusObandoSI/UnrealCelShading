@@ -12,7 +12,6 @@ void ACelShadingSettingsManager::SetupCelShadingParameters()
 	{
 		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("Saturation"), Saturation);
 		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("ShadeContrast"), ShadeContrast);
-		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), LightIntensity * LightIntensityScale);
 		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColorInfluency"), LightColorInfluency);
 
 		if (IsValid(SourceLight))
@@ -25,11 +24,21 @@ void ACelShadingSettingsManager::SetupCelShadingParameters()
 			{
 				UKismetMaterialLibrary::SetVectorParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColor"), LightColor);
 			}
+
+			if (bTrackSourceLightIntensity)
+			{
+				UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), SourceLight->GetBrightness() * LightIntensityScale);
+			}
+			else
+			{
+				UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), LightIntensity * LightIntensityScale);;
+			}
 		}
 
 		else
 		{
 			UKismetMaterialLibrary::SetVectorParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColor"), LightColor);
+			UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), LightIntensity * LightIntensityScale);
 		}
 	}
 }

@@ -25,7 +25,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0"))
     float Saturation = 1.0f;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0"))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool bEnableRuntimeLightTracking = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -35,10 +35,10 @@ public:
     bool bTrackSourceLightIntensity = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0"))
-    float LightIntensity = 1.0f;
+    float DirectionalLightIntensityScale = 1.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0"))
-    float LightIntensityScale = 1.0f;
+    float LightIntensity = 1.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0"))
     float ShadeContrast = 1.0f;

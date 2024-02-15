@@ -27,18 +27,18 @@ void ACelShadingSettingsManager::SetupCelShadingParameters()
 
 			if (bTrackSourceLightIntensity)
 			{
-				UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), SourceLight->GetBrightness() * LightIntensityScale);
+				UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), SourceLight->GetBrightness() * DirectionalLightIntensityScale);
 			}
 			else
 			{
-				UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), LightIntensity * LightIntensityScale);;
+				UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), LightIntensity);
 			}
 		}
 
 		else
 		{
 			UKismetMaterialLibrary::SetVectorParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColor"), LightColor);
-			UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), LightIntensity * LightIntensityScale);
+			UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), LightIntensity);
 		}
 	}
 }
@@ -70,6 +70,6 @@ void ACelShadingSettingsManager::Tick(float DeltaTime)
 
 	if (IsValid(SourceLight) && bTrackSourceLightIntensity)
 	{
-		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), SourceLight->GetBrightness() * LightIntensityScale);
+		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), SourceLight->GetBrightness() * DirectionalLightIntensityScale);
 	}
 }

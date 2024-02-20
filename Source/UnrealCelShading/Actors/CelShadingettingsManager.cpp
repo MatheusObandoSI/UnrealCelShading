@@ -14,20 +14,20 @@ void ACelShadingSettingsManager::SetupCelShadingParameters()
 		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("ShadeContrast"), ShadeContrast);
 		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColorInfluency"), LightColorInfluency);
 
-		if (IsValid(SourceLight))
+		if (IsValid(DirectionalLight))
 		{
-			if (bTrackSourceLightColor)
+			if (bTrackDirectionalLightColor)
 			{
-				UKismetMaterialLibrary::SetVectorParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColor"), SourceLight->GetLightColor());
+				UKismetMaterialLibrary::SetVectorParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColor"), DirectionalLight->GetLightColor());
 			}
 			else
 			{
 				UKismetMaterialLibrary::SetVectorParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColor"), LightColor);
 			}
 
-			if (bTrackSourceLightIntensity)
+			if (bTrackDirectionalLightIntensity)
 			{
-				UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), SourceLight->GetBrightness() * DirectionalLightIntensityScale);
+				UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), DirectionalLight->GetBrightness() * DirectionalLightIntensityScale);
 			}
 			else
 			{
@@ -55,7 +55,7 @@ void ACelShadingSettingsManager::BeginPlay()
 	Super::BeginPlay();
 
 	SetupCelShadingParameters();
-	SetActorTickEnabled(bEnableRuntimeLightTracking);
+	SetActorTickEnabled(bRealTimeLightTracking);
 }
 
 
@@ -63,13 +63,13 @@ void ACelShadingSettingsManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (IsValid(SourceLight) && bTrackSourceLightColor)
+	if (IsValid(DirectionalLight) && bTrackDirectionalLightColor)
 	{
-		UKismetMaterialLibrary::SetVectorParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColor"), SourceLight->GetLightColor());
+		UKismetMaterialLibrary::SetVectorParameterValue(GetWorld(), MaterialParameterCollection, FName("LightColor"), DirectionalLight->GetLightColor());
 	}
 
-	if (IsValid(SourceLight) && bTrackSourceLightIntensity)
+	if (IsValid(DirectionalLight) && bTrackDirectionalLightIntensity)
 	{
-		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), SourceLight->GetBrightness() * DirectionalLightIntensityScale);
+		UKismetMaterialLibrary::SetScalarParameterValue(GetWorld(), MaterialParameterCollection, FName("LightIntensity"), DirectionalLight->GetBrightness() * DirectionalLightIntensityScale);
 	}
 }

@@ -17,7 +17,7 @@ public:
     virtual void Tick(float DeltaTime) override;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    ADirectionalLight* SourceLight = nullptr;
+    ADirectionalLight* DirectionalLight = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     UMaterialParameterCollection* MaterialParameterCollection = nullptr;
@@ -26,13 +26,13 @@ public:
     float Saturation = 1.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    bool bEnableRuntimeLightTracking = false;
+    bool bRealTimeLightTracking = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    bool bTrackSourceLightColor = false;
+    bool bTrackDirectionalLightColor = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    bool bTrackSourceLightIntensity = false;
+    bool bTrackDirectionalLightIntensity = false;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.0"))
     float DirectionalLightIntensityScale = 1.0f;
